@@ -3,7 +3,7 @@
  * @return {string[]}
  */
 var letterCombinations = function(digits) {
-  if (digits.length === 0) {
+ if (digits.length === 0) {
     return [];
   }
   const digitMap = {
@@ -16,19 +16,21 @@ var letterCombinations = function(digits) {
     '8': ['t', 'u', 'v'],
     '9': ['w', 'x', 'y', 'z'],
   };
-  if(digits.length > 1) {
-    const firstDigit = digits.slice(0, 1);
-    const otherDigits = digits.slice(1);
-    const otherLetterCombinations = letterCombinations(otherDigits);
-    const firstDigitletters = digitMap[firstDigit];
-    let resultArr = [];
-    firstDigitletters.forEach(item1 => {
-      otherLetterCombinations.forEach(item2 => {
-        resultArr.push(item1 + item2);
-      })
-    })
-    return resultArr;
-  } else {
-    return digitMap[digits];
+  let res = []
+
+  const generateSubsets = (pos,str)=>{
+
+    if(str.length === digits.length){
+      res.push(str)
+      return
+    }
+    
+    for(let j = 0 ; j < digitMap[digits[pos]].length; j++){
+      generateSubsets(pos+1,str+digitMap[digits[pos]][j])
+    }
+    
+    return 
   }
+  generateSubsets(0,'')
+  return res
 };
