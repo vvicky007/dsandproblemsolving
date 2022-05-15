@@ -52,3 +52,7 @@ root.left.right = new TreeNode(1)
 root.right.left = new TreeNode(null)
 root.right.right = new TreeNode(6)
 averageOfSubtree(root)
+
+
+
+
